@@ -1,18 +1,21 @@
 /*global define */
-define(function (require) {
-  return function (config) {
-    var root = this,
-        OA = root.OA || {},
-        cfg = function () { 
-      return Object.freeze({
-        "base_api_url": "http://api.openaura.com/v1",
-        "stream_key": config.stream_key || "YOUR_STREAM_KEY",
-        "info_key": config.info_key || "YOUR_INFO_KEY",
-        "callback_url": config.callback_url || "YOUR_CALLBACK_URL",
-        "max_particles": config.max_particles || 100
-      });
-    };
+  define(function (require) {
+  var root = this;
 
-    return OA.config = cfg;
-  };
-});
+    return function (config) {
+      var OA = OA || root.OA || {},
+          baseCfg = {
+            "base_api_url": "http://api.openaura.com/v1",
+            "stream_key": "YOUR_STREAM_KEY",
+            "info_key": "YOUR_INFO_KEY",
+            "callback_url": "YOUR_CALLBACK_URL",
+            "max_particles": 100
+          };
+      
+      for (var key in baseCfg) {
+        config[key] = config[key] || baseCfg[key];
+      };
+      
+      return OA.config = function () { return config; };
+    };
+  });

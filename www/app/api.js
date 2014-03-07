@@ -5,8 +5,6 @@
 
 /*global OA, define */
 define(function (require) {
-  'use strict';
-  
   var $    = require('jquery'),
       _    = require('underscore'),
       util = require('./util'),
@@ -14,7 +12,10 @@ define(function (require) {
       root = this,
       
       OA_API = function(api) {
-        var cfg = prop(root, "OA.config") || require('./initialize')();
+        var cfg = function () {
+          var fn = prop(root, "OA.config") || require('./initialize')();
+          return fn();
+        };
 
         function prep(endpoint, params, callback, errback, method) {
           return {
