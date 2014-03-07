@@ -13,12 +13,12 @@ define(function (require) {
   // should use a factory method rather than calling this directly.  
   function Particle(data) {
     this._data = Object.freeze({
-      id: prop(data, "id"),
+      id: prop(data, "oa_particle_id"),
       text: prop(data, "text"),
       tags: prop(data, "tags"),
       provider: prop(data, "source.provider"),
       source: prop(data, "source"),
-      artistIds: prop(data, "artist_ids"),
+      oaArtistId: prop(data, "oa_artist_id"),
       profane: prop(data, "profane"),
       date: prop(data, "date"),
       media: new MediaCollection(prop(data, "media"))
@@ -67,7 +67,7 @@ define(function (require) {
     // OpenAura id for related artist.
     //
     // **returns** *Number* integer artist id.
-    artistIds: function () { return this._data.artistIds; },
+    oaArtistId: function () { console.dir(); return this._data.oaArtistId; },
 
     // #### profane()
     //
@@ -102,7 +102,7 @@ define(function (require) {
         tags: this.tags(),
         provider: this.provider(),
         source: this.source(),
-        artistIds: this.artistIds(),
+        oa_artist_id: this.oaArtistId(),
         profane: this.profane(),
         date: this.date(),
         media: this.media().asObject()

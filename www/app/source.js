@@ -20,10 +20,10 @@ define(function (require) {
       providerId: prop(data, "provider_id"),
       providerName: prop(data, "provider_name"),
       providerUrl: prop(data, "provider_url"),
-      totalParticles: prop(data, "particle_stats.particle_count"),
-      textParticleCount: prop(data, "particle_stats.text_count"),
-      imageParticleCount: prop(data, "particle_stats.image_count"),
-      videoParticleCount: prop(data, "particle_stats.video_count")
+      totalParticles: prop(data, "particle_stats.particle_count") || prop(data, "total_particles"),
+      textParticleCount: prop(data, "particle_stats.text_count") || prop(data, "text_particle_count"),
+      imageParticleCount: prop(data, "particle_stats.image_count") || prop(data, "image_particle_count"),
+      videoParticleCount: prop(data, "particle_stats.video_count") || prop(data, "video_particle_count")
     });
   }
 
@@ -104,13 +104,13 @@ define(function (require) {
         name: this.name(),
         uid: this.uid(),
         handle: this.handle(),
-        providerId: this.providerId(),
-        providerName: this.providerName(),
-        providerUrl: this.providerUrl(),
-        totalParticles: this.totalParticles(),
-        textParticleCount: this.textParticleCount(),
-        imageParticleCount: this.imageParticleCount(),
-        videoParticleCount: this.videoParticleCount()
+        provider_id: this.providerId(),
+        provider_name: this.providerName(),
+        provider_url: this.providerUrl(),
+        total_particles: this.totalParticles(),
+        text_particle_count: this.textParticleCount(),
+        image_particle_count: this.imageParticleCount(),
+        video_particle_count: this.videoParticleCount()
       };
     }
   };

@@ -156,6 +156,10 @@ define(function (require) {
       return new MediaCollection(
         _.map(this._data.slice(1), function (m) { return m.asObject(); })
       );
+    },
+
+    asObject: function () {
+      return _.map(this._data, function (m) { return m.asObject(); });
     }
   };
   

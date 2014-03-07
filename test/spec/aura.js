@@ -8,5 +8,17 @@ define(function (require) {
       Aura.api().setConfig(function () { return config; });
       expect(Aura.api().config()).toEqual(config);
     });
+
+    it("should be able to get an aura response for artist 47", function (done) {
+      Aura.api().setConfig(function () { return config; });
+
+      Aura.fetchByOaArtistId(47, function (a) {
+        a.particles().withMediaWithin(0, 0, 1000, 3000).each(function(x) {
+          expect(x.oaArtistId()).toEqual(47);
+        });
+
+        done();
+      });
+    });
   });
 });

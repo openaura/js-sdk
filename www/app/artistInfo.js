@@ -20,10 +20,10 @@ define(function (require) {
       oaArtistId: prop(data, "oa_artist_id"),
       name: prop(data, "name"),
       bio: prop(data, "bio.text"),
-      coverPhoto: prop(data, "cover_photo.0.media"),
-      factCard: prop(data, "fact_card.media.0.data"),
-      profilePhoto: new MediaCollection(prop(data, "profile_photo.media")),
-      styleTags: prop(data, "tags.media.0.data.tags")
+      coverPhoto: prop(data, "cover_photo.0.media") || prop(data, "cover_photo"),
+      factCard: prop(data, "fact_card.media.0.data") || prop(data, "fact_card"),
+      profilePhoto: new MediaCollection(prop(data, "profile_photo.media") || prop(data, "profile_photo")),
+      styleTags: prop(data, "tags.media.0.data.tags") || prop(data, "style_tags")
     });
   }
 
@@ -72,13 +72,13 @@ define(function (require) {
     // **returns** *Object*
     asObject: function () {
       return {
-        oaArtistId:   this.oaArtistId(),
+        oa_artist_id:   this.oaArtistId(),
         name:         this.name(),
         bio:          this.bio(),
-        coverPhoto:   this.coverPhoto(),
-        factCard:     this.factCard(),
-        profilePhoto: this.profilePhoto(),
-        styleTags:    this.styleTags()
+        cover_photo:   this.coverPhoto(),
+        fact_card:     this.factCard(),
+        profile_photo: this.profilePhoto(),
+        style_tags:    this.styleTags()
       };
     }
   };

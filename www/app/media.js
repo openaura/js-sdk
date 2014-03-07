@@ -68,7 +68,7 @@ define(function (require) {
     asObject: function () {
       return {
         id: this.id(),
-        mediaType: this.mediaType(),
+        media_type: this.mediaType(),
         url: this.url(),
         width: this.width(),
         height: this.height(),
