@@ -97,7 +97,7 @@ define(function (require) {
     // contained in this Particle object.
     asObject: function () {
       return {
-        id: this.id(),
+        oa_particle_id: this.id(),
         text: this.text(),
         tags: this.tags(),
         provider: this.provider(),

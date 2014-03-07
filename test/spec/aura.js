@@ -20,5 +20,17 @@ define(function (require) {
         done();
       });
     });
+
+    it("shouldn't blow up on particle iteration for artist 47", function (done) {
+      Aura.api().setConfig(function () { return config; });
+
+      Aura.fetchByOaArtistId(47, function (a) {
+        a.particles().withMediaWithin(0, 0, 1000, 3000).each(function(x) {
+          expect(x.id()).not.toBeNull();
+        });
+
+        done();
+      });
+    });
   });
 });
