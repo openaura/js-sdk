@@ -19,7 +19,7 @@ define(function (require) {
     this._data = Object.freeze({
       oaArtistId: prop(data, "oa_artist_id"),
       name: prop(data, "name"),
-      bio: prop(data, "bio.text"),
+      bio: prop(data, "bio.media.0.data.text"),
       coverPhoto: prop(data, "cover_photo.0.media") || prop(data, "cover_photo"),
       factCard: prop(data, "fact_card.media.0.data") || prop(data, "fact_card"),
       profilePhoto: new MediaCollection(prop(data, "profile_photo.media") || prop(data, "profile_photo")),
