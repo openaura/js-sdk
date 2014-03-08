@@ -58,7 +58,7 @@ define(function (require) {
     // #### profilePhoto()
     // Accessor for artist profile photo
     //
-    // **returns** *Particle*
+    // **returns** *MediaCollection*
     profilePhoto: function () { return this._data.profilePhoto; },
     // #### styleTags()
     // Accessor for artist style tags
