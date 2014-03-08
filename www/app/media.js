@@ -14,7 +14,7 @@ define(function (require) {
   function Media(data) {
     this._data = Object.freeze({
       id: prop(data, "id"),
-      mediaType: prop(data, "mediaType"),
+      mediaType: prop(data, "type"),
       url: prop(data, "url"),
       width: prop(data, "width"),
       height: prop(data, "height"),
@@ -68,7 +68,7 @@ define(function (require) {
     asObject: function () {
       return {
         id: this.id(),
-        media_type: this.mediaType(),
+        type: this.mediaType(),
         url: this.url(),
         width: this.width(),
         height: this.height(),
