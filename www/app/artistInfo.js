@@ -17,24 +17,45 @@ define(function (require) {
   // should use a factory method rather than calling this directly.
   function ArtistInfo(data) {
     this._data = Object.freeze({
+      oaAnchorId: prop(data, "oa_anchor_id"),
       oaArtistId: prop(data, "oa_artist_id"),
+      musicbrainzGid: prop(data, "musicbrainz_gid"),
+      requestId: prop(data, "request_id"),
       name: prop(data, "name"),
-      bio: prop(data, "bio.media.0.data.text"),
+      bio: prop(data, "bio.media.0.data.text") || prop(data, "bio"),
       coverPhoto: prop(data, "cover_photo.0.media") || prop(data, "cover_photo"),
       factCard: prop(data, "fact_card.media.0.data") || prop(data, "fact_card"),
       profilePhoto: new MediaCollection(prop(data, "profile_photo.media") || prop(data, "profile_photo")),
-      styleTags: prop(data, "tags.media.0.data.tags") || prop(data, "style_tags")
+      styleTags: prop(data, "style_tags.media.0.data.tags") || prop(data, "style_tags")
     });
   }
 
   // ### Instance Methods 
   ArtistInfo.prototype = {
+    // #### oaAnchorId()
+    //
+    // Accessor for oa_anchor_id
+    //
+    // **returns** *String*
+    oaAnchorId: function ()   { return this._data.oaAnchorId; },
     // #### oaArtistId()
     //
     // Accessor for oa_artist_id
     //
     // **returns** *Number*
     oaArtistId: function ()   { return this._data.oaArtistId; },
+    // #### musicbrainzGid()
+    //
+    // Accessor for musicbrainz_gid
+    //
+    // **returns** *String*
+    musicbrainzGid: function ()   { return this._data.musicbrainzGid; },
+    // #### requestId()
+    //
+    // Accessor for request_id
+    //
+    // **returns** *String*
+    requestId: function ()   { return this._data.requestId; },
     // #### name()
     // Accessor for artist name
     //
@@ -66,18 +87,23 @@ define(function (require) {
     // **returns** *Particle*
     styleTags: function ()    { return this._data.styleTags; },
 
+    reportingImageUrl: function () { return api.config()["base_api_url"] +  "/reporting/request/" + this.requestId() + ".gif"; }, 
+
     // #### asObject()
     // copy the data into an object for convenience
     //
     // **returns** *Object*
     asObject: function () {
       return {
+        oa_anchor_id: this.oaAnchorId(),
         oa_artist_id:   this.oaArtistId(),
+        musicbrainz_gid: this.musicbrainzGid(),
+        request_id: this.requestId(),
         name:         this.name(),
         bio:          this.bio(),
         cover_photo:   this.coverPhoto(),
         fact_card:     this.factCard(),
-        profile_photo: this.profilePhoto(),
+        profile_photo: this.profilePhoto().asObject(),
         style_tags:    this.styleTags()
       };
     }
