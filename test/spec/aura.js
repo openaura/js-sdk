@@ -32,5 +32,17 @@ define(function (require) {
         done();
       });
     });
+
+    it("mediaType shouldn't be null on particle filterByMedia Media for artist 47", function (done) {
+      Aura.api().setConfig(function () { return config; });
+
+      Aura.fetchByOaArtistId(47, function (a) {
+        a.particles().filterByMedia(function(m) {
+          expect(m.mediaType()).not.toBeNull();
+        });
+
+        done();
+      });
+    });
   });
 });
