@@ -6,7 +6,7 @@ simple JavaScript interface.
 ## Installation
 
 Download the minified JS
-[here](https://github.com/openaura/api-docs/blob/deanh/js/javascript/oa-all.min.js) and include
+[here](http://developer.openaura.com/oa-all.min.js) and include
 it in your HTML via a script tag.
 
 ## Usage
