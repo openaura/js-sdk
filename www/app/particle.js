@@ -16,7 +16,7 @@ define(function (require) {
       id: prop(data, "oa_particle_id"),
       text: prop(data, "text"),
       tags: prop(data, "tags"),
-      provider: prop(data, "source.provider"),
+      provider: prop(data, "source.provider") || prop(data, "provider"),
       source: prop(data, "source"),
       oaArtistId: prop(data, "oa_artist_id"),
       profane: prop(data, "profane"),

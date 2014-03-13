@@ -13,7 +13,7 @@ define(function (require) {
   // should use a factory method rather than calling this directly.
   function Media(data) {
     this._data = Object.freeze({
-      id: prop(data, "id"),
+      id: prop(data, "oa_media_id"),
       mediaType: prop(data, "type"),
       url: prop(data, "url"),
       width: prop(data, "width"),
@@ -67,7 +67,7 @@ define(function (require) {
     // contained in this Media object.
     asObject: function () {
       return {
-        id: this.id(),
+        oa_media_id: this.id(),
         type: this.mediaType(),
         url: this.url(),
         width: this.width(),
