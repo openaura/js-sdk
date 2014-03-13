@@ -49,7 +49,7 @@ define(function (require) {
 
           api_call.data.limit = config.max_particles;
           api_call.data.api_key = key('info');
-          api_call.url = config.base_api_url + '/search/' + endpoint + '?callback=?';
+          api_call.url = config.base_api_url + '/search/' + endpoint; // + '?callback=?';
 
           return $.ajax(api_call); // returns a jQuery.Deferred          
         };
@@ -60,7 +60,7 @@ define(function (require) {
 
           api_call.data.limit = config.max_particles;
           api_call.data.api_key = key('info');
-          api_call.url = config.base_api_url + '/particles/' + endpoint + '?callback=?';
+          api_call.url = config.base_api_url + '/particles/' + endpoint; // + '?callback=?';
 
           return $.ajax(api_call); // returns a jQuery.Deferred
         };

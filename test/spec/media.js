@@ -28,7 +28,6 @@ define(function (require) {
       var i = mediaObject.image,
           i2 = new Media(image.asObject());
 
-      console.dir(i2);
       expect(image.id()).toEqual(i.oa_media_id);
       expect(image.mediaType()).toEqual(i.type);
       expect(image.url()).toEqual(i.url);

@@ -6,7 +6,7 @@ simple JavaScript interface.
 ## Installation
 
 Download the minified JS
-[here](http://developer.openaura.com/oa-all.min.js) and include
+[here](https://raw.github.com/openaura/js-sdk/deanh/artist-search/oa-all.min.js) and include
 it in your HTML via a script tag.
 
 ## Usage
