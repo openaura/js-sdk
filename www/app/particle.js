@@ -67,7 +67,7 @@ define(function (require) {
     // OpenAura id for related artist.
     //
     // **returns** *Number* integer artist id.
-    oaArtistId: function () { console.dir(); return this._data.oaArtistId; },
+    oaArtistId: function () { return this._data.oaArtistId; },
 
     // #### profane()
     //

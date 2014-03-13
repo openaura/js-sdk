@@ -116,8 +116,8 @@ define(function (require) {
     // the name.
     exactMatch: function () {
       var that = this;
-      return _.find(this._data.results, function (r) {
-        return r.name() == that._data.reqString;
+      return _.find(this.results(), function (r) {
+        return r.name() == that.reqString();
       });
     },
 
@@ -131,7 +131,7 @@ define(function (require) {
     // **returns** *Result* The first Result which returns true on a
     // regex test() against the name qualifier.
     matchNameQualifier: function (q) {
-      return _.find(this._data.results, function (r) {
+      return _.find(this.results(), function (r) {
         return /q/.test(r.nameQualifier());
       });
     },

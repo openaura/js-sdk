@@ -7,6 +7,7 @@ define(function (require) {
       ArtistInfo = require('./artistInfo'),
       Aura = require('./aura'),
       Source = require('./source'),
+      Search = require('./search'),
       root = this;
 
   var OA = OA || {};
@@ -27,6 +28,7 @@ define(function (require) {
   OA.ArtistInfo = ArtistInfo;
   OA.Aura       = Aura;
   OA.Source     = Source;
+  OA.Search      = Search;
 
   return OA;
 });
