@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>mediaCollection.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="all.html">
+                all.js
+              </a>
+            
+              
+              <a class="source" href="api.html">
+                api.js
+              </a>
+            
+              
+              <a class="source" href="artistInfo.html">
+                artistInfo.js
+              </a>
+            
+              
+              <a class="source" href="aura.html">
+                aura.js
+              </a>
+            
+              
+              <a class="source" href="factCard.html">
+                factCard.js
+              </a>
+            
+              
+              <a class="source" href="initialize.html">
+                initialize.js
+              </a>
+            
+              
+              <a class="source" href="media.html">
+                media.js
+              </a>
+            
+              
+              <a class="source" href="mediaCollection.html">
+                mediaCollection.js
+              </a>
+            
+              
+              <a class="source" href="no-wrap.html">
+                no-wrap.js
+              </a>
+            
+              
+              <a class="source" href="particle.html">
+                particle.js
+              </a>
+            
+              
+              <a class="source" href="particleCollection.html">
+                particleCollection.js
+              </a>
+            
+              
+              <a class="source" href="search.html">
+                search.js
+              </a>
+            
+              
+              <a class="source" href="searchResult.html">
+                searchResult.js
+              </a>
+            
+              
+              <a class="source" href="source.html">
+                source.js
+              </a>
+            
+              
+              <a class="source" href="util.html">
+                util.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>mediaCollection.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*global define */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h1 id="mediacollection">MediaCollection</h1>
+<p>Module representing a collection of Media objects along with
+convient operations for filtering and accessing the objects.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>define(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(require)</span> {</span>
+  <span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>),
+      util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./util'</span>),
+      prop = util.getProperty,
+      Media = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./media'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="mediacollection-">MediaCollection()</h2>
+<p>Constructor. This takes the raw API response. Users of the SDK
+should use a factory method rather than calling this directly.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MediaCollection</span><span class="hljs-params">(data)</span> {</span>
+    <span class="hljs-keyword">this</span>._data = _.map(data, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.freeze(<span class="hljs-keyword">new</span> Media(m));
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3 id="instance-methods">Instance methods</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  MediaCollection.prototype = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h4 id="smallerthan-">smallerThan()</h4>
+<ul>
+<li><strong>param</strong> w width in pixels</li>
+<li><strong>param</strong> h height in pixels</li>
+</ul>
+<p><strong>returns</strong> <em>MediaCollection</em> with all Media objects which are smaller than
+given dimensions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    smallerThan: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(w, h)</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MediaCollection(
+        _.chain(<span class="hljs-keyword">this</span>._data)
+          .filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.width() &lt; w &amp;&amp; m.height() &lt; h;})
+          .map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); })
+          .value()
+      );
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h4 id="largerthan-">largerThan()</h4>
+<ul>
+<li><strong>param</strong> w width in pixels</li>
+<li><strong>param</strong> h height in pixels</li>
+</ul>
+<p><strong>returns</strong> <em>MediaCollection</em> with all Media objects which are larger than
+given dimensions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    largerThan: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(w, h)</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MediaCollection(
+        _.chain(<span class="hljs-keyword">this</span>._data)
+          .filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.width() &gt; w &amp;&amp; m.height() &gt; h;})
+          .map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); })
+          .value()
+      );
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h4 id="within-">within()</h4>
+<ul>
+<li><strong>param</strong> minW minimum width in pixels</li>
+<li><strong>param</strong> minH minimum height in pixels</li>
+<li><strong>param</strong> maxW maximum width in pixels</li>
+<li><strong>param</strong> maxH maximum height in pixels</li>
+</ul>
+<p><strong>returns</strong> <em>MediaCollection</em> with all Media objects within min and max dimensions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    within: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(minW, minH, maxW, maxH)</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MediaCollection(
+        _.chain(<span class="hljs-keyword">this</span>._data)
+          .filter(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(m)</span> {</span> 
+            <span class="hljs-keyword">return</span> m.width()  &gt;= minW &amp;&amp; 
+                   m.height() &gt;= minH &amp;&amp;
+                   m.width()  &lt;= maxW &amp;&amp; 
+                   m.height() &lt;= maxH;})
+          .map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); })
+          .value()
+      );
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h4 id="length-">length()</h4>
+<p><strong>returns</strong> <em>Number</em> the number of media objects in this
+MediaCollection.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    length: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.length;
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h4 id="toarray-">toArray()</h4>
+<p><strong>returns</strong> <em>Array</em> an array of Media objects in this
+MediaCollection.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    toArray: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.slice();
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h4 id="each-">each()</h4>
+<p>Iterate through the MediaCollection and call fn on each Media.</p>
+<ul>
+<li><strong>param</strong> fn A callback which operates on a Media object.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    each: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> {</span>
+      _.each(<span class="hljs-keyword">this</span>._data, fn);
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h4 id="filter-">filter()</h4>
+<p>Filter the MediaCollection using a function that takes a Media
+object and returns a boolean. This will create a new
+MediaCollection containing only Media objects for which this
+function returned a truthy value.</p>
+<ul>
+<li><strong>param</strong> fn function that takes a Media object and returns a boolean.</li>
+</ul>
+<p><strong>returns</strong> <em>MediaCollection</em> new MediaCollection containing all
+Media objects for which fn returned true.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    filter: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MediaCollection(
+        _.chain(<span class="hljs-keyword">this</span>._data)
+          .filter(fn)
+          .map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); })
+          .value()
+      );
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <h4 id="map-">map()</h4>
+<p>Iterate through all Media objects in this MediaCollection and
+return an array containing the results of calling fn on each.</p>
+<ul>
+<li><strong>param</strong> fn function that operates on a Media Object.</li>
+</ul>
+<p><strong>returns</strong> <em>Array</em> array containing the results of performing fn
+on each Media object in this MediaCollection.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    map: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> {</span>
+      <span class="hljs-keyword">return</span> _.map(<span class="hljs-keyword">this</span>._data, fn);
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h4 id="first-">first()</h4>
+<p><strong>returns</strong> <em>Media</em> the first media object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    first: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._data.length)
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data[<span class="hljs-number">0</span>];
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <h4 id="last-">last()</h4>
+<p><strong>returns</strong> <em>Media</em> the last media object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    last: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.slice(-<span class="hljs-number">1</span>).pop();
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <h4 id="tail-">tail()</h4>
+<p><strong>returns</strong> <em>MediaCollection</em> a new MediaCollection containing all
+the Media in this MediaCollection, excuding the first.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    tail: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MediaCollection(
+        _.map(<span class="hljs-keyword">this</span>._data.slice(<span class="hljs-number">1</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); })
+      );
+    },
+
+    asObject: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">return</span> _.map(<span class="hljs-keyword">this</span>._data, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(m)</span> {</span> <span class="hljs-keyword">return</span> m.asObject(); });
+    }
+  };
+  
+  <span class="hljs-keyword">return</span> MediaCollection;
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
