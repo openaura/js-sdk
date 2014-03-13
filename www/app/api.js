@@ -43,13 +43,24 @@ define(function (require) {
           return _.clone(cfg());
         };
 
+        api.artistSearch = function(endpoint, params, callback, method) {
+          var api_call = prep(endpoint, params, callback, method),
+              config = cfg();
+
+          api_call.data.limit = config.max_particles;
+          api_call.data.api_key = key('info');
+          api_call.url = config.base_api_url + '/search/' + endpoint + '?callback=?';
+
+          return $.ajax(api_call); // returns a jQuery.Deferred          
+        };
+
         api.streamRequest = function(endpoint, params, callback, method) {
           var api_call = prep(endpoint, params, callback, method),
               config = cfg();
 
           api_call.data.limit = config.max_particles;
-          api_call.data.api_key = key('stream');
-          api_call.url = config.base_api_url + '/stream/' + endpoint + '?callback=?';
+          api_call.data.api_key = key('info');
+          api_call.url = config.base_api_url + '/particles/' + endpoint + '?callback=?';
 
           return $.ajax(api_call); // returns a jQuery.Deferred
         };
