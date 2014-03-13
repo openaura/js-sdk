@@ -21,21 +21,32 @@ define(function (require) {
   // ### Instance methods
   Search.prototype = {};
 
+  Search.api = function () {
+    return api;
+  };
+
   Search.find = function (q, cb) {
-    return api.searchRequest('artists/' + q, function(status, data) {
+    return api.searchRequest('artists', {q: q}, function(status, data) {
       cb(new SearchResults(data, q));
     });    
   };
 
   Search.exactInfo = function (q, cb) {
-    return api.searchRequest('artists/' + q, function(status, data) {
+    return api.searchRequest('artists', {q: q}, function(status, data) {
       var res = new SearchResults(data, q);
       ArtistInfo.fetchByOaArtistId(res.exactMatch().oaArtistId(), cb);
     });
   };
 
+  Search.matchAlias = function (q, qual, cb) {
+    return api.searchRequest('artists', {q: q}, function(status, data) {
+      var res = new SearchResults(data, q);
+      ArtistInfo.fetchByOaArtistId(res.matchNameQualifier(qual).oaArtistId(), cb);
+    });
+  };
+
   Search.exactParticles = function (q, cb) {
-    return api.streamRequest('artists/' + q, function(status, data) {
+    return api.searchRequest('artists', {q: q}, function(status, data) {
       var res = new SearchResults(data, q);
       Aura.fetchByOaArtistId(res.exactMatch().oaArtistId(), cb);
     });

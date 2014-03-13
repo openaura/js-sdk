@@ -31,6 +31,7 @@
     'spec/media',
     'spec/artist-info',
     'spec/aura',
+    'spec/search',
     'spec/source',
     'spec/api',
     'spec/oa-all'
