@@ -63,10 +63,10 @@ Here's a simple example, using OpenAura artist id 71 (Pearl Jam):
 
 See the reference for details on working with ArtistInfo objects.
 
-### Stream API
+### Particles API
 
 Once the SDK is initialized, you can also make queries into an
-artist's aura or stream using the stream API. Here we make a query
+artist's aura or stream using the Particles API. Here we make a query
 against OpenAura artist id 47 (Taylor Swift). In the callback, we grab
 the PartcicleCollection from the returned Aura, and call its each()
 method, printing the id of each returned particle:
