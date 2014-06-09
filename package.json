@@ -16,11 +16,14 @@
     "jsdom": "~0.10.6"
   },
   "browserify": {
-    "transform": ["uglifyify" ]
+    "transform": [
+      "uglifyify"
+    ]
   },
   "devDependencies": {
     "gulp-browserify": "~0.5.0",
     "gulp-uglify": "~0.3.0",
-    "uglifyify": "~2.4.0"
+    "uglifyify": "~2.4.0",
+    "gulp-docco": "0.0.4"
   }
 }
