@@ -10,7 +10,7 @@ var _    = require('underscore'),
     util = require('./util'),
     prop = util.getProperty,
     init = require('./initialize'),
-    request = require('request'),
+    restler = require('restler'),
     Q = require('q'),
     // $ = (function () {
     //   var w;
@@ -30,10 +30,10 @@ var _    = require('underscore'),
           crossDomain: true,
           type:     typeof(method) == 'undefined' ? 'GET' : method,
           data:     params,
-          done:  function(data, textStatus, jqXHR) {
+          success:  function(data, textStatus, jqXHR) {
             callback(textStatus, data);
           },
-          fail:  function(jqXHR, textStatus, errorThrown) {
+          error:  function(jqXHR, textStatus, errorThrown) {
             callback(textStatus, false);
           }
         };
@@ -42,18 +42,21 @@ var _    = require('underscore'),
       function respserver(url, params, cb, method) {
         var deferred = Q.defer(),
             options = {
-              url: url,
               method: typeof(method) == 'undefined' ? 'GET' : method,
-              qs: params
+              query: params
             };
 
-        request.get(options, function(error, resp, data) {
-          if (!error) {
-            deferred.resolve(cb('success', JSON.parse(data)));
-          } else {
-            deferred.reject(cb('error', false));
-          }
-        });
+        restler.get(url, options)
+               .on('success', function(data, response) {
+                 deferred.resolve(cb('success', data));
+               })
+               .on('fail', function(data, response) {
+                  deferred.reject(cb('error', false));
+               })
+               .on('error', function(data, response) {
+                  deferred.reject(cb('error', false));
+               });
+
         return deferred.promise;
       }
 

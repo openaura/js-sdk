@@ -30,6 +30,23 @@ gulp.task('reqtest', function() {
   });
 });
 
+gulp.task('test-restler', function() {
+  var restler = require('restler'),
+      params = { id_type: 'oa:artist_id', limit: 100, api_key: 'brian-test' },
+      url = 'http://api.openaura.com/v1/info/artists/2',
+      options = {
+        method: 'GET',
+        query: params
+      };
+
+  restler.get(url, options)
+         .on('success', function(data, response) {
+           console.log('SUCCESS');
+           console.log('data:');
+           console.dir(data);
+         });
+});
+
 gulp.task('docs', function () {
   gulp.src("./src/js/*.js")
     .pipe(docco())

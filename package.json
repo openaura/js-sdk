@@ -14,7 +14,7 @@
     "jquery": "~2.1.1",
     "jsdom": "~0.10.6",
     "q": "^1.0.1",
-    "request": "~2.36.0",
+    "restler": "^3.2.2",
     "underscore": "~1.6.0"
   },
   "browserify": {
