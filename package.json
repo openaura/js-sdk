@@ -1,11 +1,32 @@
 {
-  "amd": {},
-  "volo": {
-    "baseUrl": "www/lib",
-    "dependencies": {
-      "jquery": "github:jquery/jquery/2.0.3",
-      "underscore": "github:amdjs/underscore/1.5.2",
-      "jsdox": "github:sutoiku/jsdox/master"
-    }
+  "name": "openaura-sdk",
+  "version": "0.0.0",
+  "description": "JavaScript SDK for OpenAura APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dean Hudson <dean@openaura.com> (http://developer.openaura.com/)",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "browserify": "~4.1.8",
+    "gulp": "~3.7.0",
+    "jquery": "~2.1.1",
+    "jsdom": "~0.10.6",
+    "q": "^1.0.1",
+    "restler": "^3.2.2",
+    "underscore": "~1.6.0"
+  },
+  "browserify": {
+    "transform": [
+      "uglifyify"
+    ]
+  },
+  "devDependencies": {
+    "gulp-browserify": "~0.5.0",
+    "gulp-uglify": "~0.3.0",
+    "uglifyify": "~2.4.0",
+    "gulp-docco": "0.0.4",
+    "vinyl-source-stream": "^0.1.1"
   }
 }
