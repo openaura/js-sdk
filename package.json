@@ -9,11 +9,13 @@
   "author": "Dean Hudson <dean@openaura.com> (http://developer.openaura.com/)",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "gulp": "~3.7.0",
     "browserify": "~4.1.8",
+    "gulp": "~3.7.0",
     "jquery": "~2.1.1",
-    "underscore": "~1.6.0",
-    "jsdom": "~0.10.6"
+    "jsdom": "~0.10.6",
+    "q": "^1.0.1",
+    "request": "~2.36.0",
+    "underscore": "~1.6.0"
   },
   "browserify": {
     "transform": [
@@ -24,6 +26,7 @@
     "gulp-browserify": "~0.5.0",
     "gulp-uglify": "~0.3.0",
     "uglifyify": "~2.4.0",
-    "gulp-docco": "0.0.4"
+    "gulp-docco": "0.0.4",
+    "vinyl-source-stream": "^0.1.1"
   }
 }
