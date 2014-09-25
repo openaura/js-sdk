@@ -6,7 +6,7 @@ var gulp            = require('gulp'),
     docco           = require("gulp-docco"),
     uglify          = require('gulp-uglify');
 
-var API_KEY = 'brian-test';
+var API_KEY = 'YOUR_API_KEY';
 
 gulp.task('compress', function() {
   gulp.src('lib/*.js')
