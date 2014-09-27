@@ -6,6 +6,7 @@ var $ = require('jquery'),
     util  = require('./util'),
     prop  = util.getProperty,
     ArtistInfo = require('./artistInfo'),
+    Classic = require('./classic'),
     Aura = require('./aura');
 
 function Result(data) {
@@ -24,6 +25,10 @@ Result.prototype = {
 
   particles: function (cb) {
     Aura.fetchByOaArtistId(this._data.oaArtistId, cb);
+  },
+
+  classic: function (cb) {
+    Classic.fetchByOaArtistId(this._data.oaArtistId, cb);
   },
 
   oaArtistId: function () { return this._data.oaArtistId; },
