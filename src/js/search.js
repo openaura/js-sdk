@@ -8,6 +8,7 @@ var $ = require('jquery'),
     prop  = util.getProperty,
     SearchResults = require('./searchResult'),
     ArtistInfo = require('./artistInfo'),
+    Classic = require('./classic'),
     Aura = require('./aura');
 
 // ## Search()
@@ -53,6 +54,23 @@ Search.exactInfo = function (q, cb) {
     ArtistInfo.fetchByOaArtistId(res.exactMatch().oaArtistId(), cb);
   });
 };
+
+// ### Search.exactClassic()
+//
+// Method to find Classic object from an exact string match on
+// artist name.
+//
+// + **param** q *String* to do search against artist names with. 
+// + **param** cb Callback. Is passed an AristInfo for the artist
+// 
+// **returns** *Classic*
+Search.exactClassic = function (q, cb) {
+  return api.searchRequest('artists', {q: q}, function(status, data) {
+    var res = new SearchResults(data, q);
+    Classic.fetchByOaArtistId(res.exactMatch().oaArtistId(), cb);
+  });
+};
+
 
 // ### Search.matchAlias()
 //

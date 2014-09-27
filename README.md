@@ -6,7 +6,7 @@ simple JavaScript interface.
 ## Installation
 
 Download the minified JS
-[here](https://raw.github.com/openaura/js-sdk/deanh/artist-search/oa-all.min.js) and include
+[here](https://raw.github.com/openaura/js-sdk/build/js/oa-all.js) and include
 it in your HTML via a script tag.
 
 ## Usage
@@ -121,28 +121,16 @@ pixels, and at most 1000x3000 pixels:
 
 ## Building
 
-This project has the following setup:
+This project uses [Gulp](http://gulpjs.com/) to build. Assuming you
+have Node.js and npm installed, cd into the project directory and:
 
-* www/ - the web assets for the project
-    * app.js - the top-level config script used by index.html
-    * app/ - the directory to store project-specific scripts.
-    * lib/ - the directory to hold third party scripts.
-* tools/ - the build tools to optimize the project.
+```
+$ npm install -f gulp
 
-To build, run:
+$ npm install
+```
 
-    node tools/r.js -o tools/build.js && cp www-built/app/all.js oa-all.min.js
+To build, run ```gulp package```. You should end up with a single file
+in build/js/oa-all.js. You can open (and play around with)
+build/index.html, which includes the JS in a script tag.
 
-That build command creates minified version of the project in a
-**www-built** directory. The app/all.js file will be optimized to
-include all of its dependencies, and is copied to the main dir for
-distribution.
-
-The example-all.html file in the main directory loads the minified
-file, so you can expeiment with it in your browser console.
-
-For more information on the optimizer:
-http://requirejs.org/docs/optimization.html
-
-For more information on using requirejs:
-http://requirejs.org/docs/api.html

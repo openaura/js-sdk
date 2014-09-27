@@ -1,14 +1,12 @@
-var gulp = require('gulp');
-var gulp_browserify = require('gulp-browserify');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var docco = require("gulp-docco");
-var uglify = require('gulp-uglify');
+/*global require */
+var gulp            = require('gulp'),
+    gulp_browserify = require('gulp-browserify'),
+    browserify      = require('browserify'),
+    source          = require('vinyl-source-stream'),
+    docco           = require("gulp-docco"),
+    uglify          = require('gulp-uglify');
 
-gulp.task('default', function() {
-  // place code for your default task here
-  console.log("hello, world!");
-});
+var API_KEY = 'YOUR_API_KEY';
 
 gulp.task('compress', function() {
   gulp.src('lib/*.js')
@@ -21,7 +19,7 @@ gulp.task('reqtest', function() {
       artist_id = 2;
 
   console.log('*^*^*^*^*^* Initializing OA SDK');
-  OA.initialize({"api_key": "brian-test"})
+  OA.initialize({"api_key": API_KEY});
 
   console.log('*^*^*^*^*^* Pulling up OA.ArtistInfo.fetchByOaArtistId');
   OA.ArtistInfo.fetchByOaArtistId(artist_id, function(ai) {
@@ -32,7 +30,7 @@ gulp.task('reqtest', function() {
 
 gulp.task('test-restler', function() {
   var restler = require('restler'),
-      params = { id_type: 'oa:artist_id', limit: 100, api_key: 'brian-test' },
+      params = { id_type: 'oa:artist_id', limit: 100, api_key: API_KEY },
       url = 'http://api.openaura.com/v1/info/artists/2',
       options = {
         method: 'GET',
@@ -53,17 +51,7 @@ gulp.task('docs', function () {
     .pipe(gulp.dest('./docs'));
 });
 
-gulp.task('package-all', function() {
-    // Single entry point to browserify
-    gulp.src('src/js/all.js')
-        .pipe(gulp_browserify({
-          insertGlobals : true,
-          debug : !gulp.env.production
-        }))
-        .pipe(gulp.dest('./build/js'));
-});
-
-gulp.task('package-moar', function() {
+gulp.task('package', function() {
   return browserify('./src/js/all.js')
         .bundle()
         .pipe(source('oa-all.js'))

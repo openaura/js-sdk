@@ -8,13 +8,15 @@ var $ = require('jquery'),
     util = require('./util'),
     prop = util.getProperty,
     api = require('./api'),
-    MediaCollection = require('./mediaCollection');
+    MediaCollection = require('./mediaCollection'),
+    ParticleCollection = require('./particleCollection');
 
 // ## ArtistInfo()
 //
 // Constructor. This takes the raw API response. Users of the SDK
 // should use a factory method rather than calling this directly.
 function ArtistInfo(data) {
+  console.dir(data);
   this._data = Object.freeze({
     oaAnchorId: prop(data, "oa_anchor_id"),
     oaArtistId: prop(data, "oa_artist_id"),
@@ -25,6 +27,7 @@ function ArtistInfo(data) {
     coverPhoto: prop(data, "cover_photo.0.media") || prop(data, "cover_photo"),
     factCard: prop(data, "fact_card.media.0.data") || prop(data, "fact_card"),
     profilePhoto: new MediaCollection(prop(data, "profile_photo.media") || prop(data, "profile_photo")),
+    //artistImages: new ParticleCollection(prop(data, "artist_images")),
     styleTags: prop(data, "style_tags.media.0.data.tags") || prop(data, "style_tags")
   });
 }
@@ -86,6 +89,12 @@ ArtistInfo.prototype = {
   // **returns** *Particle*
   styleTags: function ()    { return this._data.styleTags; },
 
+  // #### artistImages()
+  // Accessor for artist artist images
+  //
+  // **returns** *Particle*
+  artistImages: function ()    { return this._data.artistImages; },
+
   reportingImageUrl: function () { return api.config()["base_api_url"] +  "/reporting/request/" + this.requestId() + ".gif"; }, 
 
   // #### asObject()
@@ -103,6 +112,7 @@ ArtistInfo.prototype = {
       cover_photo:   this.coverPhoto(),
       fact_card:     this.factCard(),
       profile_photo: this.profilePhoto().asObject(),
+      artist_images: this.artistImages().map(function (p) { return p.asObject(); }),
       style_tags:    this.styleTags()
     };
   }
