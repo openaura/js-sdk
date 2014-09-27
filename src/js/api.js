@@ -86,7 +86,7 @@ var _    = require('underscore'),
           window_api_call.url = url;
           return $.ajax(window_api_call); 
         } else {
-          return respsever(url, params, callback, method);
+          return respserver(url, params, callback, method);
         }
       };
 
