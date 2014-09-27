@@ -6,12 +6,14 @@ var initialize = require('./initialize'),
     ArtistInfo = require('./artistInfo'),
     Aura = require('./aura'),
     Source = require('./source'),
+    Classic = require('./classic'),
     Search = require('./search'),
     OA = {
       initialize: initialize,
       ArtistInfo: ArtistInfo,
       Aura: Aura,
       Source: Source,
+      Classic: Classic,
       Search: Search
     };
 

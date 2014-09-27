@@ -108,6 +108,24 @@ var _    = require('underscore'),
         }
       };
 
+      api.classicRequest = function(endpoint, params, callback, method) {
+        var config = init.config(),
+            url = config.base_api_url + '/classic/' + endpoint,
+            window_api_call;
+
+        params.limit = config.max_particles;
+        params.api_key = key('info');
+
+        // return a jQuery.Deferred via jQuery ajax in browser or http request on server
+        if (typeof(window) != 'undefined' && window) {
+          window_api_call = prep(endpoint, params, callback, method);
+          window_api_call.url = url;
+          return $.ajax(window_api_call); 
+        } else {
+          return respserver(url, params, callback, method);
+        }
+      };
+
       api.infoRequest = function(endpoint, params, callback, method) {
         var config = init.config(),
             url = config.base_api_url + '/info/' + endpoint,
