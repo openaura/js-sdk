@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>aura.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>aura.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/*global require, module */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h1 id="aura">Aura</h1>
+<p>Module representing an Aura. An Aura is a wrapper around a
+collection of particles which are grouped by their relationship
+with an Anchor (basically a noun in our system, eg, Coldplay, Dark
+Side of the Moon, etc.)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> $ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jquery'</span>),
+    _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>),
+    util  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./util'</span>),
+    api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./api'</span>),
+    prop  = util.getProperty,
+    Particle = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./particle'</span>),
+    ParticleCollection = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./particleCollection'</span>),
+    MediaCollection = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mediaCollection'</span>),
+    Media = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./media'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="aura-">Aura()</h2>
+<p>Constructor for an Aura. Takes raw JSON returned by the API. In
+general, you should use one of the provided factory methods
+instead of accessing the constructor directly.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Aura</span><span class="hljs-params">(data)</span> {</span>
+  <span class="hljs-keyword">this</span>._data = <span class="hljs-built_in">Object</span>.freeze({
+    particleCount: prop(data, <span class="hljs-string">"total_particles"</span>),
+    anchor: prop(data, <span class="hljs-string">"anchor"</span>),
+    nextParticleSet: prop(data, <span class="hljs-string">"next_particles"</span>),
+    particles: <span class="hljs-keyword">new</span> ParticleCollection(prop(data, <span class="hljs-string">"particles"</span>))
+  });
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3 id="instance-methods">Instance methods</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Aura.prototype = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h4 id="particlecount-">particleCount()</h4>
+<p>Accessor for the number of particles returned.</p>
+<p><strong>returns</strong> <em>Number</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  particleCount: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.particleCount; },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h4 id="anchor-">anchor()</h4>
+<p>Accessor for an associated anchor.</p>
+<p><strong>returns</strong> <em>String</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  anchor: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.anchor; },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h4 id="nexparticleset-">nexParticleSet()</h4>
+<p>Accessor for the URI of the Aura containing the next set of
+particles.</p>
+<p><strong>returns</strong> <em>String</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  nextParticleSet: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.nextParticleSet; },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h4 id="particles-">particles()</h4>
+<p>Accessor for the ParticleCollection containing the result set
+for this Aura.</p>
+<p><strong>returns</strong> <em>ParticleCollection</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  particles: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._data.particles; }
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h3 id="aura-api-">Aura.api()</h3>
+<p>Accessor to api</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Aura.api = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">return</span> api;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h3 id="aura-fetchbyoaartistid-">Aura.fetchByOaArtistId()</h3>
+<p>Factory method for an Aura found by OpenAura artist id.</p>
+<ul>
+<li><strong>param</strong> id OpenAura artist id (int).</li>
+<li><strong>param</strong> cb Callback. Is passed an Aura for the artist.</li>
+</ul>
+<p><strong>returns</strong> <em>jQuery.Deffered</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Aura.fetchByOaArtistId = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(id, cb)</span> {</span>
+  <span class="hljs-keyword">return</span> api.streamRequest(<span class="hljs-string">'artists/'</span> + id, {id_type: <span class="hljs-string">"oa:artist_id"</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(status, data)</span> {</span>
+    cb(<span class="hljs-keyword">new</span> Aura(data));
+  });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h3 id="aura-fetchaurabymbgid">Aura.fetchAuraByMbGid</h3>
+<p>Factory method for an Aura found by Musicbrainz GID.</p>
+<ul>
+<li><strong>param</strong> id Musicbrainz GID.</li>
+<li><strong>param</strong> cb Callback. Is passed an Aura for the artist.</li>
+</ul>
+<p><strong>returns</strong> <em>jQuery.Deferred</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Aura.fetchByMbGid = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(id, cb)</span> {</span>
+  <span class="hljs-keyword">return</span> api.streamRequest(<span class="hljs-string">'artists/'</span> + id, {id_type: <span class="hljs-string">"musicbrainz:gid"</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(status, data)</span> {</span>
+    cb(<span class="hljs-keyword">new</span> Aura(data));
+  });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <h3 id="aura-fetchaurabyanchorid-">Aura.fetchAuraByAnchorId()</h3>
+<p>Factory method for an Aura found by OpenAura anchor id.</p>
+<ul>
+<li><strong>param</strong> id OpenAura Anchor ID (12-byte hexadecimal).</li>
+<li><strong>param</strong> cb Callback. Is passed an Aura for the artist.</li>
+</ul>
+<p><strong>returns</strong> <em>jQuery.Deferred</em></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Aura.fetchByAnchorId = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(id, cb)</span> {</span>
+  <span class="hljs-keyword">return</span> api.streamRequest(<span class="hljs-string">'artists/'</span> + id, {id_type: <span class="hljs-string">"oa:anchor_id"</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(status, data)</span> {</span>
+    cb(<span class="hljs-keyword">new</span> Aura(data));
+  });
+};
+
+module.exports = Aura;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

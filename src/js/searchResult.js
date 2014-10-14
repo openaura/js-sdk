@@ -125,6 +125,21 @@ SearchResults.prototype = {
     });
   },
 
+  // #### match()
+  //
+  // Find the first result where the name is match for the query.
+  //
+  // **returns** *Result* The first Result with an exact match for
+  // the name.
+  match: function () {
+    var that = this,
+        re = new RegExp(that.reqString(), "i");
+    return _.find(this.results(), function (r) {
+      return re.test(r.name());
+    });
+  },
+
+
   // #### matchNameQualifier()
   //
   // Find one result where the name qualifer passes a regex match
